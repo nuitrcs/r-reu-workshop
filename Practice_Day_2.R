@@ -4,22 +4,22 @@
 # names(), nrow(), str(), View(), table(), factor()
 
 # read in the safi data, then do the tasks below
-safi <- read.csv("data/SAFI_clean.csv", 
-                 na = c("", "NULL", "NA"))  
+library(readr)
+safi <-  read_csv("Desktop/NITMB/r-reu-workshop-main/data/SAFI_clean.csv")
 
 # What are the names of the variables in the data (the columns)
 # You can see variable descriptions at: http://www.datacarpentry.org/socialsci-workshop/data/
-
+colnames(safi)
 
 # How many observations in the data?
-
+nrow(safi)
 
 # Open the data frame in the viewer
 # hint: use the View() function or click on the data in the Environment pane
-
+View(safi)
 
 # What are the types of the variables?
-
+str(safi)
 
 # Make a table of respondent_wall_type to see how many observations for each;
 # what do you notice?
@@ -38,7 +38,7 @@ safi <- read.csv("data/SAFI_clean.csv",
 
 
 # select rows where no_membrs is between 2 and 5
-
+safi[(safi$no_membrs >= 2 & safi$no_membrs <= 5), ]
 
 
 
