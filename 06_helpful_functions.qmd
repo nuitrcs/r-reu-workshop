@@ -1,0 +1,139 @@
+---
+title: "tidy workflows"
+format: html
+editor_options:
+  chunk_output_type: console
+---
+
+# Setup
+
+Read in the data, and load required libraries
+
+```{r}
+healthdata <- read.csv("data/nhanes.csv")
+```
+
+# Helpful functions
+
+## paste()
+
+`paste()` is used to join, or concatenate, pieces of text together into a single string. It works element-wise on vectors.
+
+```{r}
+paste("Participant", healthdata$id, "is", healthdata$age, "years old")
+```
+
+The default separator between the elements is a space.
+
+```{r}
+paste(healthdata$gender, healthdata$age, sep=", ")
+```
+
+There is a shorthand for the common situation where you want to join the pieces of text without any separator between them: `paste0()`
+
+```{r}
+paste0(healthdata$height, "cm")
+```
+
+## TRY IT
+
+Format bp_sys1 and bp_dia1 in a blood pressure reporting format, like 120/80
+
+```{r}
+
+```
+
+# Sorting
+
+To sort the values of a vector, use `sort()`:
+
+```{r}
+sort(healthdata$age)
+sort(healthdata$age, decreasing = TRUE)
+```
+
+`NA` values are dropped by default when sorting:
+
+To sort the rows in a data frame, use the `arrange()` function from the dplyr package:
+
+```{r}
+arrange(healthdata, age)
+arrange(healthdata, desc(age))
+
+arrange(healthdata, age, pulse)
+```
+
+# Unique Values
+
+## unique()
+
+`unique()` returns the set of distinct values in a vector:
+
+```{r}
+unique(healthdata$sleep_hours)
+```
+
+`NA` is included as a value.
+
+If you use `unique()` on a data frame instead of on a vector, it drops fully duplicate rows.
+
+To get the unique values in sorted order, combine with `sort()`:
+
+```{r}
+sort(unique(healthdata$sleep_hours))
+```
+
+Note that when sorting, `NA` values are dropped.
+
+To count the number of distinct values, combine with `length()`:
+
+```{r}
+length(unique(healthdata$sleep_hours))
+```
+
+# Generating Vectors
+
+Generating a vector with a specific sequence of values in it can be useful for some data cleaning/manipulating tasks, and when doing more complex programming or creating simulations in R.
+
+## :
+
+You've already seen the colon operator when subsetting vectors and data frames:
+
+```{r}
+1:4
+-4:7
+```
+
+This creates a vector of integers inclusive of the start and end values. This can be useful if you want to number the rows in a data frame.
+
+## seq()
+
+The `seq()` (sequence) function generalizes what you can do with `:` by allowing you to use values other than integers and specify the spacing between values:
+
+```{r}
+seq(from=0, to=1.5, by=.25)
+```
+
+```{r}
+seq(0, 3, by=.7)
+```
+
+The first value in the output will be the first value (`from`) of the input. The last value of the output will be the last valid value in the sequence less than or equal to the `to` value in the input. There are some additional special cases and variants on how to use the function that you can read about in the documentation.
+
+## rep()
+
+`rep()` (repeat) builds a vector by repeating elements a specified number of times:
+
+```{r}
+rep("a", 4)
+rep(c("a", "b"), 4)       # repeats the whole vector 4 times
+rep(c("a", "b"), each=4)  # repeats each element 4 times
+```
+
+You can also specify more complicated patterns. For example:
+
+```{r}
+rep(6:9, times=1:4)
+```
+
+The first element (6) is repeated 1 time, the second (7) is repeated 2 times, and so on.
