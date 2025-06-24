@@ -172,7 +172,7 @@ getwd()
 
 You can **set** the working directory to a folder of your choice. You can set it or go to it in the Files pane (under the More menu), or with functions.
 
-```{r}
+```{r, eval=FALSE}
 setwd("r-reu-workshop/") # this is an example -- file path needs to be valid
 ```
 
@@ -261,10 +261,10 @@ str(healthdata)   # str is short for structure
 
 Core data types are:
 
--   int (integer): whole numbers, positive or negative
--   chr (character): text
--   num (numeric): numbers including decimal values
--   logi (logical): true and false values
+-   `int` (integer): whole numbers, positive or negative
+-   `chr` (character): text
+-   `num` (numeric): numbers including decimal values
+-   `logi` (logical): true and false values
 
 There are additional data types that can result from transforming variables, such as dates and factors for categorical variables.
 
@@ -306,26 +306,4 @@ We'll be working with this data set throughout the workshop. Here is some inform
 -   **sleep_trouble**: binary indicator of whether participant has sleep problems (Yes/No)
 -   **physically_active**: binary indicator of whether participant participates in at least moderate physical activities (Yes/No)
 
-# Save a Data Frame
-
-To save a data frame to a CSV file, use the `write.csv()` function.
-
-```{r, eval=FALSE}
-write.csv(healthdata[healthdata$gender == "male", ], 
-          file="male_respondents.csv",
-          row.names = FALSE)  # don't number the rows in the output
-```
-
-An alternative, from the readr package in Tidyverse, omits row names by default:
-
-```{r, eval=FALSE}
-library(readr)
-write_csv(healthdata[healthdata$gender == "male", ], 
-          file="male_respondents.csv")  
-```
-
-The file is saved in your working directory; include directories in the file path to direct the output elsewhere.
-
-If you want to work with the resulting file in Excel, it's still recommended to save a CSV file, instead of an Excel file, as Excel can easily open a CSV file.
-
-It is HIGHLY recommended to save a data frame to a new file; do NOT overwrite the original CSV or Excel file that you read into R and modified. Overwriting the original file would prevent you from undoing any changes and prevents you from replicating your workflow, since the complete workflow would use two different versions of the same file.
+# 

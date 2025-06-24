@@ -402,3 +402,27 @@ healthdata[healthdata$age < 30 &
 filter(healthdata, 
        age < 30 & (bp_dia1 > 90 | bp_sys1 > 140))
 ```
+
+# Save a Data Frame
+
+To save a data frame to a CSV file, use the `write.csv()` function.
+
+```{r, eval=FALSE}
+write.csv(healthdata[healthdata$gender == "male", ], 
+          file="male_respondents.csv",
+          row.names = FALSE)  # don't number the rows in the output
+```
+
+An alternative, from the readr package in Tidyverse, omits row names by default:
+
+```{r, eval=FALSE}
+library(readr)
+write_csv(healthdata[healthdata$gender == "male", ], 
+          file="male_respondents.csv")  
+```
+
+The file is saved in your working directory; include directories in the file path to direct the output elsewhere.
+
+If you want to work with the resulting file in Excel, it's still recommended to save a CSV file, instead of an Excel file, as Excel can easily open a CSV file.
+
+It is HIGHLY recommended to save a data frame to a new file; do NOT overwrite the original CSV or Excel file that you read into R and modified. Overwriting the original file would prevent you from undoing any changes and prevents you from replicating your workflow, since the complete workflow would use two different versions of the same file.
